@@ -7,6 +7,8 @@ V aplikaci implementovano několik typů entyt:
 
 Po spuštění dockeru se instalují php s doplňkama pro práce s soubory, mysql (několik tabulek a nějake defaultní data), phpmyadmin, nginx.
 
+!!! Do projektu je nutné přídat složky temp a log
+
 # Užívatele
 Do aplikace lse příhlasit jako administrator nebo jako běžný užívatel. Rozdil je v omezeni práva vídět určité typy entyt nebo omezeni jejích použití.
 Administrator má full prava. Pro příhlašení použíjte email admin@nubium-sandbox.test a heslo 123
