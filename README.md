@@ -35,3 +35,6 @@ Funkcionalita bez reloadu celé stránky:
 - přejmenování souborů
 - nahravání obrázku do konkrítní stránky
 - generování hesel pro užívatele
+
+## P.S.
+Omlouvám se za můj český 😊
