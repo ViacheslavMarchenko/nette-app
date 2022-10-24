@@ -1,0 +1,8 @@
+build:
+  script:
+    # Sync to FTP
+    - apt-get update -qq && apt-get install -y -qq lftp
+    - lftp -e "set ftp:ssl-allow no; open $FTP_HOST; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ -X www/uploads/*  --ignore-time --reverse --verbose --parallel=10 ./ five-photos.com/ --exclude-glob .git* --exclude .git/"
+
+  only:
+    - main

@@ -1,0 +1,7 @@
+
+    
+database:
+	default:
+		dsn: 'mysql:host=mysql;dbname=nubium'
+		user: via
+		password: via

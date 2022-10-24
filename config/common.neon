@@ -1,0 +1,13 @@
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\Presenters\*\*Presenter
+
+session:
+	expiration: 14 days
+
+decorator:
+	App\Mail\MailFactory:
+		inject: true

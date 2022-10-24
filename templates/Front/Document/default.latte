@@ -1,0 +1,59 @@
+{block content}
+<div class="container-fluid">
+	<h4 class="c-grey-900 mT-10 mB-30">Dokumenty</h4>
+    
+    <div class="row">
+		<div class="col-md-12">
+			<table class="table bgc-white bd">
+				<thead>
+					<tr>
+						<th scope="col">Název</th>
+                        <th scope="col">Jazyk</th>
+					</tr>
+				</thead>
+				<tbody n:snippet="documents">
+					<tr n:foreach="$documents as $item">
+						<td><a n:href="modal! $item->getSlug()" class="ajax document">{$item->getTitle()}</a></td>
+                        <td>{$item->Language()->getTitle()}</td>
+					</tr>
+				</tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <div class="pagination">
+                            	{if !$paginator->isFirst()}
+                            		<a n:href="default, 1">První</a>
+                            		&nbsp;|&nbsp;
+                            		<a n:href="default, $paginator->page-1">Předchozí</a>
+                            		&nbsp;|&nbsp;
+                            	{/if}
+                            
+                            	Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+                            
+                            	{if !$paginator->isLast()}
+                            		&nbsp;|&nbsp;
+                            		<a n:href="default, $paginator->getPage() + 1">Další</a>
+                            		&nbsp;|&nbsp;
+                            		<a n:href="default, $paginator->getPageCount()">Poslední</a>
+                            	{/if}
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{define modal-edit-class}
+    modal-edit-class
+{/define}
+{define modal-edit-title}
+	{ifset $document}
+        {$document->getTitle()}
+    {/ifset}
+{/define}
+{define modal-edit-body}
+	Libovolný obsah modal okna
+{/define}

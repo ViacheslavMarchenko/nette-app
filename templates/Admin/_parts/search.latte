@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="bgc-white p-20 bd">
+			<div class="row justify-content-end">
+				<div class="col-md-6">
+                    {form searchForm class => 'form-inline justify-content-end'}
+                        <div class="form-group me-sm-3 mb-2">
+                            <label n:name=s for="inputSearch" class="sr-only"></label>
+                            <input n:name=s type="text" class="form-control" id="inputSearch" value="{$s}" placeholder="Výhledavání" />
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Výhledat</button>
+                        <a  n:href="default" class="btn btn-primary mb-2 ms-2"> <i class="fas fa-brush"></i></a>
+                    {/form}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

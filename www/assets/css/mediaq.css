@@ -1,0 +1,207 @@
+@media (max-width: 1200px) {
+    .man-pointer h1 {
+        font-size: 3.2rem;
+    }
+    .man-pointer .intro {
+        font-size: 2.2rem;
+    }
+    .btn {
+        font-size: 1rem;
+    }
+    .nav-header-social {
+        flex: 1 1 auto;
+            
+    }    
+}
+
+@media (max-width: 992px) {
+    .logo {
+        width: 220px;
+        height: auto;
+    }
+    .section {
+        height: 600px;
+    }
+    .section .page-left {
+        background-position: center;
+    }
+    .man-pointer h1 {
+        font-size: 2.8rem;
+    }
+    .man-pointer .intro {
+      
+    .filters {
+        margin: 10px 0;
+    }
+    .filters .filter-group .filter-text {
+        display: none;
+    }
+    .mainpage.page + div .filters-wrap {
+        background: transparent;
+    }
+    .mainpage.page .filters .mob {
+        display: none;
+    }
+    .filter-price-group {
+        width: auto;
+    }
+    .in-content {
+        min-width: inherit;
+    }
+}
+
+@media only screen and (max-width: 570px) {
+    .header-menu {
+        display: none;
+    }
+    .cat-title h1 {
+        font-size: 30px;
+        margin-bottom: 0;
+    }
+    .site-content .cats-list {
+        display: none;
+    }
+    .top {
+        justify-content: space-between;
+    }
+    .logo {
+        width: 220px;
+    }
+    header .subheader {
+        background: #fff;
+    }
+    header.mainpage {
+        background-size: cover;
+    }
+    footer .nav-link {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .carousel-portfolio {
+        height: auto;
+    }
+    .pointer-container {
+        margin-top: 0;
+        height: 82%;
+    }
+    .man-pointer {
+        justify-content: flex-start;
+        bottom: auto;
+        height: 100%;
+        background-size: 90%
+    }
+    .man-pointer > a {
+        margin-top: 40%;
+    }
+    .man-pointer h1 {
+        margin-top: 20px;
+        font-size: 1.5rem !important;
+    }
+    .man-pointer .intro {
+        display: none;
+    }
+    .cat-wrapper {
+        position: relative;
+        box-shadow: 0 1px 21px 1px rgba(0,0,0,0.2);
+    }
+    .cat-wrapper:after {
+        content: '\f105';
+        font-family: 'FontAwesome';
+        position: absolute;
+        top: calc(50% - 10px);
+        right: 10px;
+    }
+    .cat-wrapper a {
+        display: flex;
+        align-items: center;
+    }
+    .cat-icon {
+        width: 50px;
+    }
+    .cat-icon img {
+        width: 100% !important;
+        height: 100%;
+        object-fit: contain;
+    }
+    .cat-wrapper h2 {
+        margin: 0;
+        text-align: start;
+        font-size: 16px;
+    }
+    .cat-title {
+        background-size: 13px;
+    }    
+    .card {
+        overflow: hidden;
+        flex-direction: row;
+        box-shadow: 0 1px 20px 1px rgb(0 0 0 / 20%);
+    }
+    .card-img, .card-body {
+        width: 50%;
+    }
+    .card-img {
+        height: 150px;
+    }
+    .card-body {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .card-title {
+        font-size: 14px
+    } 
+    .card-top {
+        left: -10px;
+        right: auto;
+    }
+    .form-create h4,
+    .form-filter-adv h4 {
+        font-size: 17px;
+    }
+    #snippet--smartsearch {
+        position: absolute;
+        top: 44px;
+        width: 100px;
+    }
+    .search-wrap-info.open .search-result {
+        width: calc(100vw - 60px);
+        border: none;
+    }
+    .logout {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+    }
+    #post-image-temp {
+        position: absolute;
+        width: 100%;
+        height: 76px;
+        top: 0;
+        right: 0;
+        opacity: 0;
+    }
+    #post-content > div:first-child {
+        border-bottom: 1px solid var(--bs-primary);
+    }
+    .filters-wrap {
+        background: #fff;
+        margin-bottom: 20px;
+    }
+    .filters .mob > div {
+        background-color: var(--bs-primary);
+        border-radius: 25px !important;
+    }
+    .burger-menu {
+        display: flex !important;
+    }
+    .section {
+        height: auto;
+    }
+    .page-left {
+        height: 50vh;
+        background-size: cover;
+        background-color: #fff;
+    }
+    .container-carusel {
+        height: inherit;
+    }
+}

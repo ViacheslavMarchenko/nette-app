@@ -1,0 +1,84 @@
+{block toolbar}
+	
+{/block}
+
+{block content}
+	<div class="container-fluid">
+		<h4 class="c-grey-900 mT-10 mB-30">Soubory</h4>
+    </div>
+    
+    <div class="container-fluid">
+	   <div class="row media" n:snippet="uploads">
+			<div n:foreach="$uploads as $item" class="col-md-3">
+                <div>
+					<div class="col-auto" style="margin-bottom: 10px;">
+						<span><div style="height: 80px; width: 80px;     
+                                    background-size: contain;
+                                    background-position: center;
+                                    background-repeat: no-repeat; 
+                                    background-image: url({$baseUrl}/{$item->getFilepath()}/{$item->getFilename()})"></div></span>
+					</div>
+					<div class="col">
+						<strong class="media-name" data-id="{$item->getId()}"><span>{$item->getFilename()}</span></strong>
+						<p>
+                            <a href="{$baseUrl}/{$item->getFilepath()}/{$item->getFilename()}" class="text-info merge-tag" title="Ziskat Merge Tag">Zkopírovat do schránky</a>
+                            <br />
+							Velikost: {$item->getFilesizeInMb()|bytes}
+							<br />
+							<a n:href=":remove! $item->getId()" data-id="{$item->getId()}" class=" item-remove text-danger">Odstranit</a>
+                            <br />
+                            {if !$iterator->first}
+                                <a n:href="movePrev! $item->getId()" class="ajax btn btn-sm btn-light"><i class="fa fa-arrow-left fa-fw"></i></a>
+                            {/if}
+							{if !$iterator->first & !$iterator->last} | {/if}
+                            {if !$iterator->last}
+                                <a n:href="moveNext! $item->getId()" class="ajax btn btn-sm btn-light"><i class="fa fa-arrow-right fa-fw"></i></a>
+                            {/if}
+						</p>
+					</div>
+				</div>
+            </div>
+            
+            <div class="col-md-12">
+                <hr />
+                <div class="mt-2">
+					{form uploadForm}
+                    <div class="input-group">
+						<div class="form-group">
+							{label files}
+							<br>
+							{input files}
+						</div>
+                    </div>
+					<div class="form-group mt-4">
+						{input submit 'class' => 'btn btn-primary'}
+					</div>
+					{/form}
+				</div>
+                <hr />
+            </div>
+            <table class="mt-3">
+                <tr>
+                    <td>
+                        <div class="pagination">
+                        	{if !$paginator->isFirst()}
+                        		<a n:href="default, 1">První</a>
+                        		&nbsp;|&nbsp;
+                        		<a n:href="default, $paginator->page-1">Předchozí</a>
+                        		&nbsp;|&nbsp;
+                        	{/if}
+                        
+                        	Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+                        
+                        	{if !$paginator->isLast()}
+                        		&nbsp;|&nbsp;
+                        		<a n:href="default, $paginator->getPage() + 1">Další</a>
+                        		&nbsp;|&nbsp;
+                        		<a n:href="default, $paginator->getPageCount()">Poslední</a>
+                        	{/if}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+		</div>
+	</div>

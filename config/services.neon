@@ -1,0 +1,34 @@
+parameters:
+	admin_page: signin
+	site_name: five
+	site_logo: 
+	collapsed: 1
+
+services:
+	authenticator: App\User\Authenticator()
+	authorizatorFactory: App\User\AuthorizationFactory::create()
+
+	routerFactory: App\Router\RouterFactory(@database.default.context, @session)
+	router: @routerFactory::create(%parameters%)
+
+
+	- App\Repository\UploadRepository
+	- App\Repository\UserRepository
+	- App\Repository\RoleRepository
+	- App\Repository\OptionRepository
+	- App\Repository\LanguageRepository
+	- App\Repository\FavoriteRepository
+	- App\Repository\PageRepository(@database.default.context, @session)
+
+	- App\Forms\SignInFormFactory
+	- App\Forms\ResetPassFormFactory
+	- App\Forms\Admin\UserFormFactory
+	- App\Forms\Admin\UploadFormFactory
+	- App\Forms\Admin\OptionFormFactory
+	- App\Forms\Admin\SearchFormFactory
+	- App\Forms\Admin\PageFormFactory
+
+	- App\Service\UploadService
+	- App\Mail\MailFactory
+
+	- App\Utils\Configuration(%parameters%)

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<title>Admin</title>
+	<style>
+		#loader {
+			transition: all .3s ease-in-out;
+			opacity: 1;
+			visibility: visible;
+			position: fixed;
+			height: 100vh;
+			width: 100%;
+			background: #fff;
+			z-index: 90000
+		}
+
+		#loader.fadeOut {
+			opacity: 0;
+			visibility: hidden
+		}
+
+		.spinner {
+			width: 40px;
+			height: 40px;
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			background-color: #333;
+			border-radius: 100%;
+			-webkit-animation: sk-scaleout 1s infinite ease-in-out;
+			animation: sk-scaleout 1s infinite ease-in-out
+		}
+
+		@-webkit-keyframes sk-scaleout {
+			0% {
+				-webkit-transform: scale(0)
+			}
+			100% {
+				-webkit-transform: scale(1);
+				opacity: 0
+			}
+		}
+
+		@keyframes sk-scaleout {
+			0% {
+				-webkit-transform: scale(0);
+				transform: scale(0)
+			}
+			100% {
+				-webkit-transform: scale(1);
+				transform: scale(1);
+				opacity: 0
+			}
+		}
+	</style> 
+    <link href="{$baseUrl}/assets/css/awesome.css" type="text/css" rel="stylesheet" />
+    <link href="{$baseUrl}/assets/css/bootstrap.css" type="text/css" rel="stylesheet" />   
+	<link href="{$baseUrl}/admin-static/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="app">
+<div id="loader">
+	<div class="spinner"></div>
+</div>
+<script>
+    window.addEventListener('load', function load() {
+        const loader = document.getElementById('loader');
+        setTimeout(function () {
+            loader.classList.add('fadeOut');
+        }, 100);
+    });
+</script>
+<div class="container-fluid">
+    <div class="vh-100 row">
+        <div class="col-12 col-md-4 col-lg-3 bg-light v-100 scrollable pos-r p-4">
+            <div class="bgc-black bdrs-50p pos-r">
+    			<div class="logo">
+                    <span>Administrace</span>
+                </div>
+    		</div>
+    		<div n:foreach="$flashes as $flash" n:class="alert-flash, alert, 'alert-' . ($flash->type === 'error' ? 'danger' : $flash->type)">{$flash->message}</div>
+    		<div n:snippet="authform" class=" mt-4">
+                {if $signform}
+        			{form signInForm}
+        				<div class="form-group">
+        					{label email 'class' => 'text-normal text-dark required'}
+        					{input email 'class' => 'form-control'}
+        				</div>
+        				<div class="form-group mt-4">
+        					{label password 'class' => 'text-normal text-dark required'}
+        					{input password 'class' => 'form-control'}
+        				</div>
+                        {ifset recaptcha}            
+                        <div class="form-group mt-4">
+                            {input recaptcha}
+                            <span style='color:red'>{$form['recaptcha']->getError()}</span>
+                        </div>
+                        {/ifset}                        
+        				<div class="form-group mt-4">
+        					<div class="peers ai-c jc-sb fxw-nw mT-30 d-flex justify-content-between align-items-center">
+    							{input submit 'class' => 'btn btn-primary'}
+                                <a n:href="resetpassword!" class="ajax">Zapoměl jste heslo</a>
+        					</div>
+        				</div>
+        			{/form}
+                {else}
+                    {form resetPassForm}
+        				<div class="form-group">
+        					{label email 'class' => 'text-normal text-dark required'}
+        					{input email 'class' => 'form-control'}
+        				</div>
+        				<div class="form-group mt-4">
+        					<div class="peers ai-c jc-sb fxw-nw mT-30 d-flex justify-content-between align-items-center">
+        						{input submit 'class' => 'btn btn-primary'}
+                                <a n:href="loginform!" class="ajax">Login</a>
+        					</div>
+        				</div>
+        			{/form}
+                {/if}
+    		</div>
+    
+    	</div>
+        
+    	<div class="col-12 col-md-8 col-lg-9 scrollable">
+    		<div class="pos-a centerXY">
+    			
+    		</div>
+    	</div>
+    </div>
+</div>
+
+{block scripts}
+<script type="text/javascript" src="{$baseUrl}/assets/js/jquery.js"></script>
+<script type="text/javascript" src="{$baseUrl}/assets/js/nette.ajax.js"></script>
+<script type="text/javascript" src="{$baseUrl}/assets/js/netteForms.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=g_onRecaptchaLoad&amp;render=explicit" async defer></script>
+
+<script>
+$(function () {
+    $.nette.init();
+    
+    $.nette.ext('bs-modal', {
+        before: function (xhr, settings) {
+            //document.getElementById('loader').classList.remove('fadeOut');
+    	},
+        
+		init: function() {
+			
+		},
+        
+		success: function (jqXHR, status, settings) {
+            if (typeof settings.responseJSON === 'undefined')
+                return;
+                
+			if (typeof settings.responseJSON.snippets != 'undefined') {
+				var $snippet_authform = settings.responseJSON.snippets['snippet--authform'];
+                
+                if ($snippet_authform) {
+                    $(".alert-flash").remove();
+                    g_onRecaptchaLoad();
+                }
+			}
+        }
+    })
+    
+    var clientIDs = {};
+
+	window['g_onRecaptchaLoad'] = function () {
+		$('.g-recaptcha').each(function () {
+			var el = $(this);
+
+			clientIDs[this.id] = grecaptcha.render(this, {
+				size: 'invisible',
+				badge: 'bottomleft',
+				callback: function (token) {
+					el.closest('form.recaptcha').off('submit').trigger('submit');
+				}
+
+			}, true);
+		});
+
+		$(function () {
+			$('form.recaptcha').on('submit', function (event) {
+				event.preventDefault();
+
+				var form = $(this);
+				if (Nette.validateForm(this, true)) {
+					// execute only reCAPTCHAs in submitted form
+					$('.g-recaptcha', form).each(function () {
+						grecaptcha.execute(clientIDs[this.id]);
+					});
+				}
+			});
+		});
+	};
+})
+</script>
+{/block}
+</body>
+</html>

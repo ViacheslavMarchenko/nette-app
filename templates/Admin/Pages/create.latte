@@ -1,0 +1,100 @@
+{block content}
+
+<div class="container-fluid">
+	<h4 class="c-grey-900 mT-10 mB-20">
+		{ifCurrent Pages:create}Nová stránka{/ifCurrent}
+		{ifCurrent Pages:edit}Úprava stránky{/ifCurrent}
+	</h4>
+                    
+    {form pageForm}
+	<div class="row">
+		<div class="col-md-8">
+			<div class="bgc-white p-20 bd">
+				<div class="row mt-4">
+					<div class="col-md-12">
+						<div class="form-group">
+							{label title}
+							{input title 'class' => 'form-control'}
+						</div>
+					</div>
+				</div>
+                <div class="row mt-4">
+					<div class="col-md-12">
+						<div class="form-group">
+							{label slug}
+							{input slug 'class' => 'form-control'}
+						</div>
+					</div>
+				</div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+						<div class="form-group">
+							{label content}
+							{input content 'class' => 'form-control tinymce'}
+						</div>
+                    </div>
+                </div>
+            </div>
+		</div>
+        <div class="col-md-4">
+            <div class="form-group mt-2">
+                <div class="p-2 bg-warning bg-opacity-25 rounded">
+                    <a n:href="modal! 'edit'" class="ajax">Přídat obrázek</a>
+                    {snippet featureimage}
+                        <div class="feature-image-wrapper">
+                            <div class="feature-image">
+                                <img src="{$featureImageUrl}" width="100%" />
+                            </div>
+                        
+                        </div>
+                        {if $featureImageUrl != ''}
+                            <a class="ajax future-remove" n:href="removeFeatureImage!" data-id="{$featureImageId}" onclick="f_removeFeatureImage">Smazat obrázek</a>
+                        {/if}
+                    {/snippet}
+                </div>    
+                <input n:name=feature_image type="hidden" class="future-image-id" value="{$featureImageId}" />
+			</div>
+            
+            {if $user->isInRole('superadmin')}
+            <div class="form-group mt-4">
+                <div class="row mt-4">
+					<div class="col-md-12">
+						<div class="form-check form-switch">
+                            <label n:name=activeinactive class="form-check-label" for="flexSwitchActiveInactive">Označte tuto kategorie jako aktivní nebo neaktivní</label>
+							<input n:name=activeinactive class="form-check-input" type="checkbox" id="flexSwitchActiveInactive" />
+						</div>
+					</div>
+                </div>
+                
+                <div class="row mt-4">
+					<div class="col-md-12">
+						<div class="form-check form-switch">
+                            <label n:name=sitemap class="form-check-label" for="flexSwitchSitemap">Přídat do mapy webu</label>
+							<input n:name=sitemap class="form-check-input" type="checkbox" id="flexSwitchSitemap" />
+						</div>
+					</div>
+                </div>
+			</div>	
+            {/if}
+            
+			<div class="form-group mt-2 d-flex justify-content-end">
+                {input submit class => 'btn btn-primary'}
+			</div>
+        
+        </div>
+	</div>
+    {/form}        
+</div>
+
+{define modal-edit-class}
+    modal-edit-class
+{/define}
+{define modal-edit-title}
+	Media
+{/define}
+{define modal-edit-body}
+	Libovolný obsah modal okna
+{/define}
+{define modal-edit-footer}
+	<button class="btn btn-primary media-close" data-dismiss="modal" aria-label="Close">OK</button>
+{/define}

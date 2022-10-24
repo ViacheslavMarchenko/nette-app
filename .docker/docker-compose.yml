@@ -1,0 +1,50 @@
+version: '3.1'
+
+services:       
+    php:
+        container_name: nubium
+        image: php_nubium
+        build: build/php
+        volumes:
+            - ../:/var/www/html
+        ports:
+          - 80:80
+          - 443:443
+        links:
+            - mysql 
+        environment:
+            - DEBUG_NETTE=1
+        depends_on:
+            - mysql
+
+    nginx:
+        container_name: nubium_nginx
+        build: build/nginx
+        image: nginx_nubium
+        depends_on:
+            - php
+
+    mysql:
+        container_name: nubium_mysql
+        image: mysql_nubium
+        build: build/mysql
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=via
+            - MYSQL_PASSWORD=via
+            - MYSQL_DATABASE=nubium 
+        volumes:
+            - ./build/mysql/db_create.sql:/docker-entrypoint-initdb.d/db_create.sql
+            - ./build/mysql/db_data.sql:/docker-entrypoint-initdb.d/db_data.sql
+            
+    phpmyadmin:
+        container_name: nubium_phpmyadmin
+        image: phpmyadmin
+        ports:
+            - 8091:80
+        environment:
+            - PMA_HOST=mysql
+            - PMA_USER=via
+            - PMA_PASSWORD=via

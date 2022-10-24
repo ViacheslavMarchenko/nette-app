@@ -1,0 +1,30 @@
+{block content}
+
+<div class="row mb-4 mx-0">
+
+    <div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . ($flash->type === 'error' ? 'danger' : $flash->type)">{$flash->message}</div>
+	<div class="signin mt-4 col-12 col-sm-8 offset-2 col-md-4 offset-md-4">
+		{form signInForm}
+            <div class="form-group">
+				{label email 'class' => 'text-normal text-dark required'}
+				{input email 'class' => 'form-control'}
+			</div>
+			<div class="form-group mt-4">
+				{label password 'class' => 'text-normal text-dark required'}
+				{input password 'class' => 'form-control'}
+			</div>
+            {ifset recaptcha}            
+            <div class="form-group mt-4">
+                {input recaptcha}
+                <span style='color:red'>{$form['recaptcha']->getError()}</span>
+            </div>
+            {/ifset}                        
+			<div class="form-group mt-4">
+				<div class="peers ai-c jc-sb fxw-nw mT-30 d-flex justify-content-between align-items-center">
+					{input submit 'class' => 'btn btn-primary'}
+                    <a n:href=":Admin:Auth:" class="ajax">Zapoměl jste heslo</a>
+				</div>
+			</div>
+		{/form}
+	</div>
+</div>

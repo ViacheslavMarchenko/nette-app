@@ -1,0 +1,114 @@
+{block toolbar}
+	<li>
+		<a class="bgcH-grey-100 c-grey-700" n:href="Pages:create">
+			<i class="ti-plus mR-10"></i>
+			<span style="position: relative; top: -3px">Přidat stránku</span>
+		</a>
+	</li>
+{/block}
+
+{block content}
+	<div class="container-fluid">
+		<h4 class="c-grey-900 mT-10 mB-30">Stránky</h4>
+        
+        {include '../_parts/search.latte'}
+        
+		<div class="row">
+			<div n:snippet="pages" class="col-md-12">
+                {if ($pagesFavorites|length) > 0}
+                <table class="table bgc-white bd">
+                    <thead>
+						<tr>
+							<th scope="col">Název</th>
+							<th scope="col">Poslední zmena</th>
+                            <th></th>
+                            <th scope="col" class="d-flex justify-content-end">Akce</th>
+						</tr>
+					</thead>
+					<tbody>
+                        <tr n:foreach="$pagesFavorites as $item">
+							<td><a n:href="Pages:edit $item->getId()">{$item->getTitle()}</a></td>
+							<td>{$item->getModifydate()->format('j. n. Y - H:i')}</td>
+                            <td>
+                                <a n:href="addFavorite! $item->getId()" class="ajax">
+                                    {if $item->isFavorite($user)}<i class="fas fa-star"></i>
+                                    {else}<i class="far fa-star"></i>
+                                    {/if}
+                                </a>
+                            </td>
+                            <td class="d-flex justify-content-end">
+								<a n:href="Pages:edit $item->getId()" class="btn btn-sm btn-primary me-2"><i class="fa fa-pencil fa-fw"></i> Upravit</a>
+								{if $user->isAllowed("pages", "create")}
+								<a href="#" data-id="{$item->getId()}" class="item-remove btn btn-sm btn-danger ms-2"><i class="fa fa-trash fa-fw"></i> Odstranit</a>
+                                
+                                {/if}
+							</td>
+						</tr>
+                    </tbody>
+                    <tfoot><tr><td><div class="mt-5"></div></td></tr></tfoot>
+                </table>
+                {/if}
+                {if ($pages|length) > 0}
+                <table class="table bgc-white bd">
+                    <thead>
+						<tr>
+							<th scope="col">Název</th>
+							<th scope="col">Poslední zmena</th>
+                            <th></th>
+                            <th scope="col" class="d-flex justify-content-end">Akce</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr n:foreach="$pages as $item">
+							<td><a n:href="Pages:edit $item->getId()">{$item->getTitle()}</a></td>
+							<td>{$item->getModifydate()->format('j. n. Y - H:i')}</td>
+                            <td>
+                                <a n:href="addFavorite! $item->getId()" class="ajax">
+                                    {if $item->isFavorite($user)}<i class="fas fa-star"></i>
+                                    {else}<i class="far fa-star"></i>
+                                    {/if}
+                                </a>
+                            </td>
+                            <td class="d-flex justify-content-end">
+								<a n:href="Pages:edit $item->getId()" class="btn btn-sm btn-primary me-2"><i class="fa fa-pencil fa-fw"></i> Upravit</a>
+								{if $user->isAllowed("pages", "create")}
+								<a href="#" data-id="{$item->getId()}" class="item-remove btn btn-sm btn-danger ms-2"><i class="fa fa-trash fa-fw"></i> Odstranit</a>
+                                
+                                
+                                {if $s == ''}
+                                <a n:href="moveUp! $item->getId()" class="btn btn-sm btn-light ajax{first} disabled{/first} me-2"><i class="fa fa-arrow-up fa-fw"></i></a>
+								<a n:href="moveDown! $item->getId()" class="btn btn-sm btn-light ajax{last} disabled{/last}"><i class="fa fa-arrow-down fa-fw"></i></a>
+                                {/if}
+                                {/if}
+							</td>
+						</tr>
+					</tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <div class="pagination">
+                                	{if !$paginator->isFirst()}
+                                		<a n:href="default, 1">První</a>
+                                		&nbsp;|&nbsp;
+                                		<a n:href="default, $paginator->page-1">Předchozí</a>
+                                		&nbsp;|&nbsp;
+                                	{/if}
+                                
+                                	Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+                                
+                                	{if !$paginator->isLast()}
+                                		&nbsp;|&nbsp;
+                                		<a n:href="default, $paginator->getPage() + 1">Další</a>
+                                		&nbsp;|&nbsp;
+                                		<a n:href="default, $paginator->getPageCount()">Poslední</a>
+                                	{/if}
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    {/if}
+				</table>
+			</div>
+		</div>
+        
+	</div>

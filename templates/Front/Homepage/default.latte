@@ -1,0 +1,15 @@
+{block content}
+
+{block fbmeta}
+    <meta property="og:title" content="{$page->getTitle()}">
+    <meta property="og:description" content='{$page->getContent()|slice: 0, 200|stripHtml|replace: '\n\r', ' '}'>
+    <meta property="og:image" content="{$baseUrl}{$page->FeatureImage('thumb-2x1')}">
+{/block}
+
+<div class="carusel container-carusel container-fluid p-0">
+     <div class="row m-0">
+        <div class="col-12 p-0">
+        {$page->getContent()}
+        </div>
+    </div>
+</div>

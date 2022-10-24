@@ -1,0 +1,56 @@
+.five-overlay-wrapper {
+    z-index: 99999;
+    position: fixed;
+}
+.five-overlay-body-show {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 999;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+}
+
+.five-lightbox-pictures {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 20px;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px 20px;
+    width: calc(100% - 40px);
+    max-width: 1280px;
+    z-index: 999;
+    background: #ffffff;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease-out;
+    -webkit-transition: opacity 0.3s ease-out;
+}
+
+.five-lightbox-pictures-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.five-close-modal {
+    position: fixed;
+    display: none;
+    top: 10px;
+    color: #dddddd;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    z-index: 55000;
+    font-size: 30px;
+}
+
+.five-close-icon-show {
+    display: block;
+}
+

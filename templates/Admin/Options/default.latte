@@ -1,0 +1,30 @@
+{block content}
+{if ($user->isInRole('superadmin'))}
+<div class="container-fluid">
+	<h4 class="c-grey-900 mT-10 mB-20">
+		Nastavení
+	</h4>
+    
+    {form optionForm}
+	<div class="row">
+		<div class="col-md-12">
+            <div class="form-group">
+				{label adminemail}
+				{input adminemail 'class' => 'form-control'}
+			</div>
+            
+            <div class="form-group mt-2">
+				{label post_per_page}
+				{input post_per_page 'class' => 'form-control'}
+			</div>
+				
+            
+			<div class="form-group mt-2 d-flex justify-content-end">
+				{input submit class => 'btn btn-primary'}
+			</div>
+        
+        </div>
+	</div>
+    {/form}
+</div>
+{/if}
