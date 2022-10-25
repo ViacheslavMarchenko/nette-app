@@ -1,6 +1,6 @@
 # Nubium test - nette app
 V aplikaci implementovano několik typů entyt:
-- [x] #739 užívatelé
+- [x] užívatelé
 - [x] stránky
 - [x] nastavení
 - [x] soubory
@@ -37,4 +37,4 @@ Funkcionalita bez reloadu celé stránky:
 - generování hesel pro užívatele
 
 ## P.S.
-Omlouvám se za můj český 😊
+Omlouvám se za svou češtinu 😊
